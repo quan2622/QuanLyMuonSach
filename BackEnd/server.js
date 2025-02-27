@@ -1,14 +1,17 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const ApiError = require("./src/api-error");
 const routeAdmin = require("./src/routes/admin/index");
 require('dotenv').config()
+const database = require("./src/config/database");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// connect database
+database.connect();
 
 // Route
 routeAdmin(app);
