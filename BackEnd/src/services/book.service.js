@@ -3,7 +3,7 @@ const publisherModel = require("../models/publisher.model");
 
 class bookService {
   async getAll() {
-    return await bookModel.find().sort({soQuyen: "desc"});
+    return await bookModel.find().sort({soQuyen: "desc"}).populate("maNXB");
   }
 
   async getByName(name) {

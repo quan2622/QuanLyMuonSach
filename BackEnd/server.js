@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const ApiError = require("./src/api-error");
 const routeAdmin = require("./src/routes/admin/index");
+const routeUser = require("./src/routes/user/index");
 require('dotenv').config()
 const database = require("./src/config/database");
 
@@ -15,6 +16,7 @@ database.connect();
 
 // Route
 routeAdmin(app);
+routeUser(app);
 
 // Cài đặt xử lý lỗi
 app.use((req, res, next) => {
