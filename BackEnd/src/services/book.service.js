@@ -3,8 +3,7 @@ const publisherModel = require("../models/publisher.model");
 
 class bookService {
   async getAll() {
-    const data = await bookModel.find({});
-    return await data.toArray();
+    return await bookModel.find().sort({soQuyen: "desc"});
   }
 
   async getByName(name) {
@@ -17,21 +16,30 @@ class bookService {
     const bookExisted = await bookModel.findOne({
       $or: [{ tenSach: data.tenSach }]
     });
-    console.log("Ton tai " + bookExisted);
     if (!bookExisted) {
       const newBook = new bookModel(data);
       const saveBook = await newBook.save();
-      // console.log(saveBook);
-      console.log("********************");
-      const Sach = await saveBook.populate('maNXB');
-      console.log(Sach);
-      console.log("********************");
+      const Book = await saveBook.populate('maNXB');
       return {
-        Newbook: Sach,
+        Newbook: Book,
         message: "Thêm sách thành công",
       };
     }
-    return { message: "Thêm sách thất bại" };
+    return { message: "Sách đã tồn tại" };
+  }
+
+  async updateOne(id, data) {
+    const bookUpdated = await bookModel.findOneAndUpdate({ _id: id }, data, { new: true, });
+    return await bookUpdated.populate("maNXB");
+  }
+
+  async deleteOne(id) {
+    return await bookModel.findOneAndDelete({ _id: id });
+  }
+
+  async deleteAll() {
+    const data = await bookModel.deleteMany();
+    return data.deletedCount;
   }
 }
 

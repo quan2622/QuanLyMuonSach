@@ -6,17 +6,16 @@ class bookController {
     let data = [];
     
     try {
-      const { tenSach } = req.query;
-      if (tenSach) {
-        data = await bookService.getByName(name);
+      const { bookName } = req.query;
+      if (bookName) {
+        data = await bookService.getByName(bookName);
       } else {
         data = await bookService.getAll();
       }
+      return res.send(data);
     } catch (error) {
       return next(new ApiError(500, "Không thể truy xuất dữ liệu"));
     }
-
-    return res.send(data);
   }
 
   // POST admin/book
@@ -26,7 +25,6 @@ class bookController {
     }
 
     try {
-      console.log("du lieu truyen vao", req.body);
       const data = await bookService.create(req.body);
       return res.json(data);
     } catch (error) {
@@ -35,19 +33,41 @@ class bookController {
     }
   }
   
-  // DELETE admin/book
-  deleteAll(req, res) {
-    res.send({ message: "delete" });
-  }
-
   // PUT admin/book/:id
-  updateOne(req, res) {
-    res.send({ message: "updateOne" });
+  async updateOne(req, res, next) {
+    if (!req.body) {
+      return next(new ApiError(400, "Thông tin cập nhật không thể bỏ trống"));
+    }
+    try {
+      const data = await bookService.updateOne(req.params.id, req.body)
+      if (!data) return next(new ApiError(404, "Không tìm thấy sách cần cập nhật"));
+      return res.json(data);
+    } catch (error) {
+      return next(new ApiError(500, "Lỗi trong quá trình chỉnh sửa thông tin sách"));
+    }
+    
   }
-
+  
   // DELETE admin/book/:id
-  deleteOne(req, res) {
-    res.send({ message: "deleteOne" });
+  async deleteOne(req, res) {
+    try {
+      const data = await bookService.deleteOne(req.params.id);
+      if (!data) return next(new ApiError(404, "Không tìm thấy sách cần xóa"));
+      return res.send({ message: "Xóa thông tin sách thành công" });
+    } catch (error) {
+      return next(new ApiError(500, `Không thể xóa sách có id = ${req.params.id}`));
+    }
+  }
+  
+  // DELETE admin/book
+  async deleteAll(req, res, next) {
+    try {
+      const data = await bookService.deleteAll();
+      if (data == 0) return res.send({ message: "Dữ liệu sách trống" });
+      return res.send({message: `Đã xóa ${data} quyển sách`})
+    } catch (error) {
+      return next(new ApiError(500, "Lỗi trong quá trình xóa sách"));
+    }
   }
 }
 
