@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const ApiError = require("./src/api-error");
 const routeAdmin = require("./src/routes/admin/index");
 const routeUser = require("./src/routes/user/index");
@@ -9,6 +10,7 @@ const database = require("./src/config/database");
 const app = express();
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 // connect database
