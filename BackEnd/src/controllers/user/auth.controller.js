@@ -8,7 +8,7 @@ class authController {
     }
 
     try {
-      const data = await authService.signIn(req.body);
+      const data = await authService.signInUser(req.body);
       res.status(200).json(data);
     } catch (error) {
       return next(new ApiError(500, "Lỗi không thể đăng nhập"));

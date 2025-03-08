@@ -74,7 +74,10 @@ class borrowService {
     });
 
     if (!record) {
-      return { message: 'Không thể xóa phiếu mượn' };
+      return {
+        message: 'Không thể xóa phiếu mượn',
+        status: false,
+       };
     }
 
     if (record.trangThai != 'return') {
@@ -86,23 +89,29 @@ class borrowService {
 
     return {
       dataBorrow: record,
+      status: true,
       message: 'Xóa thành công',
     }
   }
 
   // Client
   async create(userId, data) {
-    const newRecord = new borrowModel(data);
+    const newRecord = new borrowModel({
+      maDocGia: userId,
+      maSach: data.maSach,
+      soLuongMuon: data.soLuongMuon
+    });
     await newRecord.save();
     // console.log(newRecord);
-    await boookModel.findOneAndUpdate({ _id: newRecord.maSach }, { $inc: { soLuongDaMuon: newRecord.soLuongMuon } });
+    await boookModel.findOneAndUpdate({ _id: newRecord.maSach }, { $inc: { soLuongDaMuon: newRecord.soLuongMuon, soQuyen: -newRecord.soLuongMuon } });
     return {
+      status: true,
       message: "Gửi phiếu mượn thành công",
     }
   }
 
   async getAllForUser(userId) {
-    const record = await borrowModel.find({ maDocGia: userId });
+    const record = await borrowModel.find({ maDocGia: userId }).populate('maSach', ["tenSach", "donGia","namXuatBan"]);
     if (!record) return { message: "Không tìm thấy phiếu mượn" };
     return {
       dataBorrow: record,

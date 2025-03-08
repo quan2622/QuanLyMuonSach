@@ -1,5 +1,7 @@
 const md5 = require("md5");
 const staffModel = require("../models/staff.model")
+const userModel = require("../models/user.model");
+
 
 class authService {
   async signIn(data) {
@@ -7,6 +9,24 @@ class authService {
     const passWord = data.passWord;
 
     const user = await staffModel.findOne({ soDienThoai: soDienThoai });
+    
+    if (!user) {
+      return { message: "Tài khoản không tồn tại" };
+    }
+    if (md5(passWord) != user.passWord) {
+      return { message: "Sai mật khẩu" };
+    }
+    return {
+      accountInfo: user,
+      message: "Đăng nhập thành công"
+    }
+  }
+  
+  async signInUser(data) {
+    const soDienThoai = data.soDienThoai;
+    const passWord = data.passWord;
+
+    const user = await userModel.findOne({ dienThoai: soDienThoai });
     
     if (!user) {
       return { message: "Tài khoản không tồn tại" };
