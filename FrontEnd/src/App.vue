@@ -1,13 +1,19 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
+<script>
+import { RouterView } from 'vue-router'
+import AppHeader from "./components/partial/header.vue"
+export default {
+  components: {
+    AppHeader,
+  }
+}
 </script>
 
 <template>
-  <h1>Hello vuejs abc</h1>
+  <AppHeader></AppHeader>
+  <RouterView/>
 </template>
 
 <style scoped>
-h1 {
-  padding: .2rem 2rem;
-}
+
 </style>
+

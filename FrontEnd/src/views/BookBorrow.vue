@@ -1,0 +1,139 @@
+<script>
+import { useBorrowStore } from "@/stores/borrow.store";
+import { ElMessage, ElMessageBox } from "element-plus";
+
+export default {
+  data() {
+    return {
+      borrowStore: useBorrowStore(),
+    }
+  },
+
+  async mounted() {
+    if (!this.borrowStore.fetching) {
+      await this.borrowStore.getAll();
+    }
+  }, 
+  methods: {
+    handleStatus(status) {
+      return {
+        waiting: "Chờ duyệt",
+        borrowed: "Đang mượn",
+        return: "Đã trả",
+      }[status]     
+    },
+    handlDeleteBorrow(id) {
+      ElMessageBox.confirm(
+        `Xác nhận xóa phiếu mượn`,
+        {
+          confirmButtonText: 'Xác Nhận',
+          cancelButtonText: 'Hủy',
+          type: 'warning',
+          draggable: true,
+        }
+      )
+        .then(async() => {
+          await this.borrowStore.delete(id);
+          if (this.borrowStore.statusDelete) {
+            ElMessage({
+              message: 'Xóa phiếu mượn thành công !',
+              type: 'success',
+              plain: true,
+            });
+            await this.borrowStore.getAll();
+          } else {
+            ElMessage({
+              message: 'Không thể xóa phiếu mượn !',
+              type: 'danger',
+              plain: true,
+            });
+          }
+        })
+        .catch(() => {
+          ElMessage({
+            showClose: true,
+            message: 'Hủy hành động.',
+            type: 'warning',
+          })
+        })
+   }
+  }
+
+}
+</script>
+
+<template>
+  <main class="container">
+    <h1 class="text-center m-4">Danh sách phiếu mượn sách</h1>
+
+    <div class="card mb-3">
+      <div class="card-header">Danh sách</div>
+      <div class="card-body">
+        <table class="table table-hover table-sm">
+          <thead>
+            <tr>
+              <!-- <th><input type="checkbox" name="checkall" /></th> -->
+              <th>STT</th>
+              <th>Ảnh bìa</th>
+              <th>Tên sách</th>
+              <th>Số lượng mượn</th>
+              <th>Trạng thái</th>
+              <th>Ngày mượn</th>
+              <th>Ngày trả</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(data, index) in borrowStore.formatDateTime" :key="data._id" :class="{'table-active': data.trangThai === 'borrowed'}">
+              <!-- <td><input type="checkbox" name="id" value="1" /></td> -->
+              <td>{{ index+1 }}</td>
+              <td><img src="..." alt="Sản phẩm" width="100px" /></td>
+              <td>{{ data.maSach.tenSach }}</td>
+              <td style="width: 120px; text-align: center;">
+                <input
+                  type="number"
+                  style="width: 70px; border-radius: none;"
+                  min="1"
+                  name="position"
+                  v-model="data.soLuongMuon"
+                />
+              </td>
+              <td>
+                <span :class="{
+                  'badge': true,
+                  'badge-secondary': data.trangThai === 'waiting',
+                  'badge-info': data.trangThai === 'borrowed',
+                  'badge-success': data.trangThai === 'return'
+                }">
+                  {{ handleStatus(data.trangThai) }}
+                </span>
+              </td>
+              <td>{{ data.ngayMuon }}</td>
+              <td>{{ data.ngayTra }}</td>
+              <td>
+                <!-- <a class="btn btn-info btn-sm" href="/admin/products/detail/1">
+                  Chi tiết
+                </a>
+                <a
+                  class="btn btn-warning btn-sm ml-1"
+                  href="/admin/products/edit/1"
+                >
+                  Sửa
+                </a> -->
+                <button class="btn btn-sm ml-1" 
+                :class="{
+                  'btn-secondary': data.trangThai === 'borrowed',
+                  'btn-danger': data.trangThai === 'waiting' || data.trangThai === 'return'
+                }" 
+                :disabled="data.trangThai === 'borrowed'"
+                @click="handlDeleteBorrow(data._id)">
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</template>
