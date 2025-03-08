@@ -12,7 +12,7 @@ class bookController {
       } else {
         data = await bookService.getAll();
       }
-      return res.send(data);
+      return res.json(data);
     } catch (error) {
       return next(new ApiError(500, "Không thể truy xuất dữ liệu"));
     }
@@ -23,7 +23,6 @@ class bookController {
     if(!req.body.tenSach) {
       return next(new ApiError(400, "Ten khong duoc bo trong"));
     }
-
     try {
       const data = await bookService.create(req.body);
       return res.json(data);

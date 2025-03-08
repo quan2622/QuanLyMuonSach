@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import("@/views/HomeView.vue"),
     },
     {
+      path: "/admin/login",
+      name: "Adminlogin",
+      component: () => import("@/views/Admin.Login.vue"),
+    },
+    {
       path: "/login",
       name: "login",
       component: () => import("@/views/LogIn.vue"),
@@ -28,6 +33,32 @@ const router = createRouter({
       name: "detail",
       component: () => import("@/views/DetailBook.vue"),
       props: true,
+    },
+    {
+      path: "/admin/profile",
+      name: "profile",
+      component: () => import("@/views/Admin.Profile.vue"),
+    },
+    {
+      path: "/admin/book-category",
+      name: "book-category",
+      component: () => import("@/views/Admin.Book.vue"),
+    },
+    {
+      path: "/admin/book/:id",
+      name: "book-detail",
+      component: () => import("@/views/Admin.Detail.vue"),
+      props: true,
+    },
+    {
+      path: "/admin/book/create",
+      name: "book-create",
+      component: () => import("@/views/Admin.Create.vue"),
+    },
+    {
+      path: "/admin/borrow-category",
+      name: "borrow-category",
+      component: () => import("@/views/Admin.Borrow.vue"),
     },
   ],
 })

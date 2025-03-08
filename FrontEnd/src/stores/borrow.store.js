@@ -9,6 +9,7 @@ export const useBorrowStore = defineStore("borrow", {
       fetching: false,
       statusCreate: false,
       statusDelete: false,
+      messageUpdate: '',
     }
   },
 
@@ -37,6 +38,22 @@ export const useBorrowStore = defineStore("borrow", {
       return await axiosInstance.delete(`/borrow/delete/${borrowId}`)
         .then((res) => {
           this.statusDelete = res.data.status;
+        })
+        .catch((err) => console.log(err))
+    },
+    // Admin
+    async getAllAdmin() {
+      return await axiosInstance.get("/admin/borrow")
+        .then((res) => {
+          console.log(res.data.borrowList);
+          this.dataBorrow = res.data.borrowList;
+        })
+        .catch((err) => console.log(err))
+    },
+    async updateStatusAdmin(data) {
+      return await axiosInstance.post("/admin/borrow/update", data)
+        .then((res) => {
+          this.statusUpdate = res.data.message;
         })
         .catch((err) => console.log(err))
     }

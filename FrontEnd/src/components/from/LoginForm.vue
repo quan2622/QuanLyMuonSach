@@ -16,7 +16,11 @@ export default {
         soDienThoai: this.soDienThoai,
         passWord: this.passWord,
       }
-      await userStore.SignIn(loginData);
+
+      if (this.$route.path.startsWith("/admin")) {
+        await userStore.SignInAdmin(loginData);
+      }
+      else await userStore.SignIn(loginData);
 
       if (userStore.token) {
         ElMessage({
@@ -24,7 +28,10 @@ export default {
           type: 'success',
           plain: true,
         });
-        this.$router.push("/");
+        if (this.$route.path.startsWith("/admin")) {
+          this.$router.push("/admin/profile");
+        }
+        else this.$router.push("/");
       } else {
         ElMessage({
           message: "Mật khẩu hoặc tài khoản không đúng. Vui lòng đăng nhập lại!",

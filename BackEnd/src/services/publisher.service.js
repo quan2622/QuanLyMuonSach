@@ -21,6 +21,7 @@ class publisherService {
     );
     return {
       Publisher: newPublisher,
+      status: true,
       message: "Thêm mới thành công",
     }
   }

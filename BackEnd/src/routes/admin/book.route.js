@@ -1,15 +1,24 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express')
+const multer = require('multer')
+const upload = multer()
+const router = express.Router()
 
-const bookController = require("../../controllers/admin/book.controller");
+const bookController = require('../../controllers/admin/book.controller')
+const uploadCloud = require("../../Middleware/uploadCloud");
 
-router.route("/")
+router
+  .route('/')
   .get(bookController.getAll)
-  .post(bookController.create)
+  .post(
+    upload.single('anhBia'),
+    uploadCloud.upload,
+    bookController.create
+  )
   .delete(bookController.deleteAll)
 
-router.route("/:id")
+router
+  .route('/:id')
   .delete(bookController.deleteOne)
   .put(bookController.updateOne)
 
-module.exports = router;
+module.exports = router

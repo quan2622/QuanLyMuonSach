@@ -9,13 +9,11 @@ function removeVietnameseTones(str) {
     .toLowerCase(); // Chuyển về chữ thường
 }
 
-export const useBookStore = defineStore("book", {
+export const usePublisherStore = defineStore("publisher", {
   state: () => {
     return {
-      books: [],
-      searchTxt: "", 
-      fetching: false,
-      fetchingAdmin: false,
+      publisher: [],
+      fetch: false,
       statusCreate: false,
       statusUpdate: false,
       statusDelete: false,
@@ -23,55 +21,35 @@ export const useBookStore = defineStore("book", {
   },
 
   actions: {
-    // Client
     async getAll() {
-      return await axiosInstance.get("/home")
+      return await axiosInstance.get("/admin/publisher")
         .then((res) => {
-          console.log(res.data);
-          this.books = [...res.data];
-          this.fetching = true;
-        })
-        .catch((err) => { console.log(err) })
-    },
-    
-    handleChangeTxtSearch(value) {
-      this.searchTxt = value;
-    },
-
-    // Admin
-    async getAllAdmin() {
-      return await axiosInstance.get("/admin/book")
-        .then((res) => {
-          console.log(res.data)
-          this.books = res.data;
-          this.fetchingAdmin = true;
+          this.publisher = res.data;
+          this.fetch = true;
         })
         .catch((err) => console.log(err))
     },
-    async createAdmin(data) {
-      return await axiosInstance.post("/admin/book", data, {
-        headers: { "Content-Type": "multipart/form-data", }, timeout: 5000
-      })
+    async create(data) {
+      return await axiosInstance.post("/admin/publisher", data)
         .then((res) => {
           this.statusCreate = res.data.status;
-          return res.data.message;
         })
         .catch((err) => console.log(err))
     },
-    async updateAdmin(bookId, data) {
-      return await axiosInstance.put(`/admin/book/${bookId}`, data)
+    async update(publisherId, data) {
+      return await axiosInstance.put(`/admin/publisher/${publisherId}`, data)
         .then((res) => {
           this.statusUpdate = true;
         })
         .catch((err) => console.log(err))
     },
-    async deleteAdmin(bookId) {
-      return await axiosInstance.delete(`/admin/book/${bookId}`)
+    async deletePublisher(publisherId) {
+      return await axiosInstance.delete(`/admin/publisher/${publisherId}`)
         .then((res) => {
           this.statusDelete = true;
         })
         .catch((err) => console.log(err))
-    }
+    },
   },
 
   getters: {

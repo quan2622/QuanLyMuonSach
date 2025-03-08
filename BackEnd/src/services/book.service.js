@@ -22,10 +22,14 @@ class bookService {
       const Book = await saveBook.populate('maNXB');
       return {
         Newbook: Book,
+        status: true,
         message: "Thêm sách thành công",
       };
     }
-    return { message: "Sách đã tồn tại" };
+    return {
+      message: "Sách đã tồn tại",
+      status: false,
+    };
   }
 
   async updateOne(id, data) {
