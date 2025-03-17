@@ -46,9 +46,9 @@
   font-weight: 500;
 }
 
-.li-active {
+/* .li-active {
   border-bottom: 2px solid #ce1212;
-}
+} */
 
 .nav-menu>ul>li {
   padding: 15px 14px;
@@ -65,6 +65,7 @@
   padding: 8px 32px;
   margin: 0;
   border-radius: 50px;
+  border: none;
 }
 /* Sider */
 main .sider {
@@ -213,10 +214,90 @@ main .content-main {
   cursor: default;
 }
 
-
 /* Detail */
 /* Create */
 main .ad-form {
   padding: 20px;
 }
 /* Create */
+/* Publisher */
+.limit-char {
+  width: 300px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+
+.box-search {
+  padding: 6px 16px;
+  width: 300px;
+  border-radius: 50px;
+  background: #ededed;
+  border: none;
+  outline: none;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.addPublisher {
+  position: absolute;
+  right: 0;
+  margin-right: 36px;
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+}
+
+/* Publisher */
+/* Borrow */
+/* Modal */
+.modal-borrow {
+  padding: 10px 30px;
+}
+
+.modal-borrow .modal-img {
+  overflow: hidden;
+}
+
+.modal-borrow .modal-img img{
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+.modal-borrow .info-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #37373f;
+}
+
+.modal-borrow .info-desc {
+  font-size: 20px;
+  font-weight: 500;
+  color: #37373f;
+}
+
+.button-info {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  font-weight: 400;
+  padding: 4px 8px;
+}
+
+.button-info:hover {
+  color: #fff;
+  background-color: #138496;
+  border-color: #117a8b;
+}
+/* Modal */
+
+/* Borrow */

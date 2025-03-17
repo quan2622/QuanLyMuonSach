@@ -9,7 +9,10 @@ export default {
     },
     NavToProfile() {
       this.$router.push("/admin/profile");
-    }
+    },
+    NavToPublisher() {
+      this.$router.push("/admin/publisher-category");
+    },
   }
 }
 </script>
@@ -20,8 +23,9 @@ export default {
         <div class="inner-menu">
           <ul>
             <li @click="NavToProfile">Admin</li>
-            <li @click="NavToCategoryBook">Danh Mục Sách</li>
             <li @click="NavToCategoryBorrow">Danh Mục Phiếu Mượn</li>
+            <li @click="NavToCategoryBook">Danh Mục Sách</li>
+            <li @click="NavToPublisher">Danh Mục Nhà Xuất Bản</li>
           </ul>
         </div>
       </div>

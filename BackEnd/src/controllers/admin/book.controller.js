@@ -38,6 +38,7 @@ class bookController {
       return next(new ApiError(400, "Thông tin cập nhật không thể bỏ trống"));
     }
     try {
+      console.log(req.body);
       const data = await bookService.updateOne(req.params.id, req.body)
       if (!data) return next(new ApiError(404, "Không tìm thấy sách cần cập nhật"));
       return res.json(data);

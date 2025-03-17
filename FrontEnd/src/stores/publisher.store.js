@@ -17,6 +17,7 @@ export const usePublisherStore = defineStore("publisher", {
       statusCreate: false,
       statusUpdate: false,
       statusDelete: false,
+      searchTxt: "",
     };
   },
 
@@ -50,15 +51,18 @@ export const usePublisherStore = defineStore("publisher", {
         })
         .catch((err) => console.log(err))
     },
+    handleChangeTxtSearch(value) {
+      this.searchTxt = value;
+    },
   },
 
   getters: {
-    detailBook(state) {
-      return (id) => state.books.find((book) => book._id == id);
+    detailPublisher(state) {
+      return (id) => state.publisher.find((data) => data._id == id);
     },
-    filterBook(state) {
+    filterPublisher(state) {
       const search = removeVietnameseTones(state.searchTxt);
-      return state.books.filter((book) => removeVietnameseTones(book.tenSach).toUpperCase().indexOf(search.toUpperCase()) != -1);
+      return state.publisher.filter((data) => removeVietnameseTones(data.tenNXB).toUpperCase().indexOf(search.toUpperCase()) != -1);
     },
   }
 })

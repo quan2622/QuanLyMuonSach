@@ -3,7 +3,7 @@ import { useBookStore } from "@/stores/book.store";
 import { useBorrowStore } from "@/stores/borrow.store";
 import { useUserStore } from "@/stores/user.store";
 import { ElMessage, ElMessageBox } from "element-plus";
-
+import handleLoading from "../../helper/handleLoadingPage";
 
 export default {
 
@@ -22,11 +22,10 @@ export default {
   },
   async created() {
     const id = this.id;
-    console.log(id);
     this.bookDetail = await this.bookStore.detailBook(id);
     if (!this.bookDetail) {
-      await this.bookStore.getAll().then(() => {
-        this.bookDetail = this.bookStore.detailBook(id);
+      await this.bookStore.getAll().then(async() => {
+        this.bookDetail = await this.bookStore.detailBook(id);
       })
     }
   },
@@ -70,7 +69,20 @@ export default {
             type: 'warning',
           })
         })
-    }
+    },
+    // handleLoading() {
+    //   const loading = ElLoading.service({
+    //     lock: true,
+    //     text: 'Đang tải',
+    //     background: 'rgba(0, 0, 0, 0.3)',
+    //   })
+    //   setTimeout(() => {
+    //     loading.close()
+    //   }, 400);
+    // }
+  },
+  mounted() {
+    handleLoading();
   }
    
 };
@@ -81,16 +93,15 @@ export default {
   <main>
     <div class="title-page"> 
       <p>THÔNG TIN</p> 
-      <h3>TÁC PHẨM {{ this.userStore.user._id }}</h3>
+      <h3>TÁC PHẨM</h3>
     </div>
-    <div>
+    <div v-if="bookDetail">
       <div class="product__info">
         <div class="container">
             <div class="row info-wrap">
                 <div class="col-5 image__size">
                     <div class="product__image">
-                        <!-- Swiper -->
-                        <img :src="bookDetail.image" :alt="bookDetail.tenSach">
+                        <img :src="bookDetail.anhBia" :alt="bookDetail.tenSach">
                     </div>
                 </div>
                 <div class="col-7">
@@ -119,10 +130,6 @@ export default {
 
                         <div class="row">
                             <div class="product__btn">
-                                <!-- <button @click="handleBorrow" class="col-lg-5 col-md-6 col-12 product--add-cart">
-                                    <i class="fa-solid fa-cart-plus"></i>
-                                    Mượn sách
-                                </button> -->
                                 <button @click="handleBorrow" class="col-lg-5 col-md-6 col-12 product--add-cart">
                                     <i class="fa-solid fa-cart-plus"></i>
                                     Mượn sách
@@ -134,6 +141,10 @@ export default {
             </div>
         </div>
       </div>
+    </div>
+
+    <div v-else class="main-message">
+      <p>Đang tải thông tin sách...</p>
     </div>
   </main>
 </template>

@@ -13,6 +13,9 @@ export default {
   computed: {
     currentHeader() {
       return this.$route.path.startsWith('/admin') ? "AdminHeader" : "AppHeader";
+    },
+    isAdminSide() {
+      return this.$route.path.startsWith('/admin') && this.$route.name != "Adminlogin";
     }
   },
 }
@@ -22,7 +25,7 @@ export default {
   <!-- <AppHeader></AppHeader> -->
    <div>
      <component :is="currentHeader"></component>
-     <AdminSider></AdminSider>
+     <AdminSider v-if="isAdminSide"></AdminSider>
 
      <RouterView/>
    </div>

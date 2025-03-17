@@ -5,6 +5,11 @@ export default {
   components: {
     CreateBook,
   },
+  data() {
+    return {
+      book: {},
+    }
+  },
   methods: {
     handleNavToLogIn() {
       this.$router.push("/login");
@@ -17,7 +22,7 @@ export default {
   <main>
     <div class="content-main ad-form">
       <h1 class="title-page">Thêm Thông Tin Sách Mới</h1>
-      <CreateBook></CreateBook>
+      <CreateBook :book="book"></CreateBook>
     </div>
   </main>
 </template>

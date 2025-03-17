@@ -57,14 +57,15 @@ export const useUserStore = defineStore("user", {
         .then((res) => {
           this.token = res.data.accountInfo?.token;
           document.cookie = `token=${this.token}; path=/; max-age=${7 * 24 * 60 * 60}; secure; SameSite=Lax`;
-          this.user = res.data.accountInfo;
+          this.admin = res.data.accountInfo;
         })
         .catch((err) => console.log(err))
     },
     // All
     async SignOut() {
+      await axiosInstance.get("/auth/signOut")
       this.token = null;
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; max-age=0";
     }    
   }
 });

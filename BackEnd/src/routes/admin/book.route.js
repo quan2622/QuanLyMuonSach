@@ -19,6 +19,10 @@ router
 router
   .route('/:id')
   .delete(bookController.deleteOne)
-  .put(bookController.updateOne)
+  .put(
+    upload.single('anhBia'),
+    uploadCloud.upload,
+    bookController.updateOne
+  )
 
 module.exports = router

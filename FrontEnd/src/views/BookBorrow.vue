@@ -87,16 +87,10 @@ export default {
             <tr v-for="(data, index) in borrowStore.formatDateTime" :key="data._id" :class="{'table-active': data.trangThai === 'borrowed'}">
               <!-- <td><input type="checkbox" name="id" value="1" /></td> -->
               <td>{{ index+1 }}</td>
-              <td><img src="..." alt="Sản phẩm" width="100px" /></td>
+              <td><img :src="data?.anhBia" alt="Sản phẩm" width="100px" /></td>
               <td>{{ data.maSach.tenSach }}</td>
               <td style="width: 120px; text-align: center;">
-                <input
-                  type="number"
-                  style="width: 70px; border-radius: none;"
-                  min="1"
-                  name="position"
-                  v-model="data.soLuongMuon"
-                />
+                {{ data.soLuongMuon }}
               </td>
               <td>
                 <span :class="{

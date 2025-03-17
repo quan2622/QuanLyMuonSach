@@ -21,9 +21,11 @@ export default {
       <p>DANH SÁCH</p> 
       <h3>TÁC PHẨM</h3>
     </div>
-    <div class="row">
-      <div class="col-12 box-search"> 
-        <input type="text" placeholder="Nhập tên sách" @input="bookStore.handleChangeTxtSearch($event.target.value)">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 box-search-user"> 
+          <input type="text" placeholder="Nhập tên sách" @input="bookStore.handleChangeTxtSearch($event.target.value)">
+        </div>
       </div>
     </div>
     <div class="good_container container">

@@ -16,6 +16,7 @@ class borrowController {
   async updateStatus(req, res, next) {
     try {
       const maNV = res.locals.user._id;
+      // const result = await borrowService.updateStatus(maNV, req.body);
       const result = await borrowService.updateStatus(maNV, req.body);
       return res.json(result);
     } catch (error) {

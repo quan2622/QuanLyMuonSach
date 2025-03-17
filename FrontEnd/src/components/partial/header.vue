@@ -1,7 +1,7 @@
 <script>
 import {RouterLink} from 'vue-router'
 import {useUserStore} from '@/stores/user.store'
-import {ElMessage} from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 export default {
   data() {
@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     handleSignOut(user) {
-      user.SignOut()
+      user.SignOut();
       ElMessage({
         message: 'Đăng xuất thành công',
         type: 'warning',

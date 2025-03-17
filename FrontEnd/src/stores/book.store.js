@@ -59,7 +59,9 @@ export const useBookStore = defineStore("book", {
         .catch((err) => console.log(err))
     },
     async updateAdmin(bookId, data) {
-      return await axiosInstance.put(`/admin/book/${bookId}`, data)
+      return await axiosInstance.put(`/admin/book/${bookId}`, data, {
+        headers: { "Content-Type": "multipart/form-data", }, timeout: 5000
+      })
         .then((res) => {
           this.statusUpdate = true;
         })

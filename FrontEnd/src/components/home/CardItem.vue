@@ -17,7 +17,7 @@ export default {
     <div class="inner-item-product">
       
         <div class="item-image">
-          <img src="" alt="image-book">
+          <img :src="data.anhBia" alt="image-book">
           <div class="product-button">
               <div class="button-item">
                   <span @click="navigaToDetail()"><i class="fa-solid fa-eye"></i><i class="ml-1">Xem chi tiết</i></span>

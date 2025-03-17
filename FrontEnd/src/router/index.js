@@ -43,22 +43,65 @@ const router = createRouter({
       path: "/admin/book-category",
       name: "book-category",
       component: () => import("@/views/Admin.Book.vue"),
-    },
-    {
-      path: "/admin/book/:id",
-      name: "book-detail",
-      component: () => import("@/views/Admin.Detail.vue"),
-      props: true,
-    },
-    {
-      path: "/admin/book/create",
-      name: "book-create",
-      component: () => import("@/views/Admin.Create.vue"),
+      children: [
+        {
+          path: "",
+          name: "book-index",
+          component: () => import("@/components/Book-Admin/index.vue"),
+        },
+        {
+          path: ":id",
+          name: "book-detail",
+          component: () => import("@/components/Book-Admin/BookDetail.vue"),
+          props: true,
+        },
+        {
+          path: "create",
+          name: "book-create",
+          component: () => import("@/components/Book-Admin/BookCreate.vue"),
+        },
+        {
+          path: "edit/:id",
+          name: "book-edit",
+          component: () => import("@/components/Book-Admin/BookEdit.vue"),
+          props: true,
+        },
+      ]
     },
     {
       path: "/admin/borrow-category",
       name: "borrow-category",
       component: () => import("@/views/Admin.Borrow.vue"),
+      children: [
+        {
+          path: "",
+          name: "borrow-index",
+          component: () => import("@/components/Borrow-Admin/index.vue"),
+        }
+      ]
+    },
+    {
+      path: "/admin/publisher-category",
+      name: "publisher-category",
+      component: () => import("@/views/Admin.Publisher.vue"),
+      children: [
+        {
+          path: '',
+          name: "publisher-index",
+          component: () => import("@/components/Publisher/index.vue"),
+        },
+        {
+          path: 'create',
+          name: "publisher-create",
+          component: () => import("@/components/Publisher/Publisher-Create.vue"),
+        },
+        {
+          path: 'edit/:id',
+          name: "publisher-edit",
+          component: () => import("@/components/Publisher/Publisher-Edit.vue"),
+          props: true,
+        },
+      ]
     },
   ],
 })

@@ -1,10 +1,9 @@
 <script>
 import { useBookStore } from "@/stores/book.store";
 
-
 export default {
   props: {
-    id: {type: String, require: true},
+    id: {type: String, required: true},
   },
   data() {
     return {
@@ -13,11 +12,10 @@ export default {
     }
   },
   async created() {
-    this.detailBook = await this.bookStore.detailBook(this.id);
-    if (!this.detailBook) {
-      await this.bookStore.getAllAdmin().then(() => {
-        this.detailBook = this.bookStore.detailBook(this.id);
-      })
+    this.detailBook = this.bookStore.detailBook(this.id);
+    if (!this.detailBook._id) {
+      await this.bookStore.getAllAdmin();
+      this.detailBook = this.bookStore.detailBook(this.id);
     }
   }
 }
@@ -31,7 +29,7 @@ export default {
         <div class="row">
           <div class="col-4">
             <div class="avatar">
-              <img src="https://intamphuc.vn/wp-content/uploads/2023/06/mau-bia-sach-dep-2.jpg" :alt="detailBook.tenSach" class="img-book">
+              <img :src="detailBook?.anhBia" :alt="detailBook.tenSach" class="img-book">
               <!-- <h2>Tựa sách</h2> -->
             </div>
           </div>
@@ -44,7 +42,7 @@ export default {
               </div>
               <div class="row mt-3 content">
                 <div class="col-4 title-option"> <span>Tác giả:</span> {{ detailBook.tacGia }}</div>
-                <div class="col-8 option"> <span>Nhà xuất bản:</span> {{ detailBook.maNXB.tenNXB }}</div>
+                <div class="col-8 option"> <span>Nhà xuất bản:</span> {{ detailBook.maNXB?.tenNXB }}</div>
               </div>
               <div class="row mt-3 content">
                 <div class="col-4 title-option"> <span>Đơn giá:</span> {{ detailBook.donGia }}</div>
