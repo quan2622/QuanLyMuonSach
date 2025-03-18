@@ -31,7 +31,10 @@ export default {
         if (this.$route.path.startsWith("/admin")) {
           this.$router.push("/admin/profile");
         }
-        else this.$router.push("/");
+        else {
+          const redirectPath = this.$route.query.redirect || '/'
+          this.$router.push(redirectPath);
+        }
       } else {
         ElMessage({
           message: "Mật khẩu hoặc tài khoản không đúng. Vui lòng đăng nhập lại!",

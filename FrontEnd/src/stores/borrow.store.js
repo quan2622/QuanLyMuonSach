@@ -83,8 +83,8 @@ export const useBorrowStore = defineStore("borrow", {
     formatDateTime(state) {
       return state.dataBorrow.map(item => ({
         ...item,
-        ngayMuon: moment(item.ngayMuon).format("HH:mm - DD/MM/YYYY"),
-        ngayTra: moment(item.ngayTra).format("HH:mm - DD/MM/YYYY"),
+        ngayMuon: item?.ngayMuon ? moment(item.ngayMuon).format("HH:mm - DD/MM/YYYY") : '--/--/----',
+        ngayTra: item?.ngayTra ? moment(item.ngayTra).format("HH:mm - DD/MM/YYYY") : '--/--/----',
       }))
     },
     filterBorrowId(state) {

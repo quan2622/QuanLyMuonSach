@@ -61,13 +61,14 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main">
       <h1 class="title-page">Danh Mục Sách</h1>
       <div style="padding: 0 30px;">
         <div class="card mt-4 mb-4">
           <div class="card-header">
-            <button @click="handleNavToCreate">Thêm Mới</button>
+            <input class="box-search" type="text" placeholder="Nhập tên sách cần tìm" @input="bookStore.handleChangeTxtSearch($event.target.value)">
+            <button class="btn btn-primary addPublisher" @click="handleNavToCreate">Thêm Mới</button>
           </div>
           <div class="card-body">
             <table class="table table-hover table-sm">

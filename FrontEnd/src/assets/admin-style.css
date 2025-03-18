@@ -68,6 +68,10 @@
   border: none;
 }
 /* Sider */
+.box-sider {
+  position: relative;
+}
+
 main .sider {
   width: 200px;
   background: #ce1212;
@@ -105,12 +109,16 @@ main .sider {
 }
 /* Sider */
 /* Book */
+.main-right {
+  background: var(--background);
+}
+
 main .content-main {
   padding: 15px;
   position: relative;
   left: 200px;
   width: calc(100% - 215px);
-  background: var(--background);
+  min-height: 650px;
 }
 
 .content-main .title-page {
@@ -276,13 +284,19 @@ main .ad-form {
 .modal-borrow .info-title {
   font-size: 17px;
   font-weight: bold;
-  color: #37373f;
+  color: #7f7f90;
 }
 
 .modal-borrow .info-desc {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   color: #37373f;
+}
+
+.modal-borderBottom {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #ce1212;
 }
 
 .button-info {
@@ -297,6 +311,12 @@ main .ad-form {
   color: #fff;
   background-color: #138496;
   border-color: #117a8b;
+}
+
+.el-dialog__footer {
+  background: #fff;
+  margin: 0;
+  padding: 0;
 }
 /* Modal */
 

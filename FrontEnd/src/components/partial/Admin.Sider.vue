@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="box-sider">
     <div class="sider">
         <div class="inner-menu">
           <ul>

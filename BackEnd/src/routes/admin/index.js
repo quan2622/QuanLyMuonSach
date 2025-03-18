@@ -9,8 +9,8 @@ const authMiddleware = require("../../Middleware/auth.middleware");
 
 module.exports = (app) => {
   const ADMIN_PATH = systemConfig.prefixAdmin;
-  app.use(ADMIN_PATH + "/book", bookRoutes);
-  app.use(ADMIN_PATH + "/publisher", publisherRoutes);
+  app.use(ADMIN_PATH + "/book", authMiddleware.requireAuthAdmin, bookRoutes);
+  app.use(ADMIN_PATH + "/publisher", authMiddleware.requireAuthAdmin, publisherRoutes);
   app.use(ADMIN_PATH + "/account", staffRoutes);
   app.use(ADMIN_PATH + "/auth", authRoutes);
   app.use(ADMIN_PATH + "/borrow", authMiddleware.requireAuthAdmin, borrowRoutes);

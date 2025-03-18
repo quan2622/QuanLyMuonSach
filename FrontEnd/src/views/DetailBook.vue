@@ -3,7 +3,7 @@ import { useBookStore } from "@/stores/book.store";
 import { useBorrowStore } from "@/stores/borrow.store";
 import { useUserStore } from "@/stores/user.store";
 import { ElMessage, ElMessageBox } from "element-plus";
-import handleLoading from "../../helper/handleLoadingPage";
+import handleLoading from "../helper/handleLoadingPage";
 
 export default {
 

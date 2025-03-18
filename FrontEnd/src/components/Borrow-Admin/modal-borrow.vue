@@ -1,42 +1,25 @@
+<script>
+import formatDate from "@/helper/formatDate";
+import { statusHandler } from "@/helper/handleStatusBorrow";
 
-<script lang="ts" setup>
-import { reactive, ref } from 'vue'
-
-const dialogTableVisible = ref(false)
-
-const form = reactive({
-  name: '',
-  region: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-})
-
-const gridData = [
-  {
-    date: '2016-05-02',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+export default {
+  props: {
+    data: {type: Object, required: true},
   },
-  {
-    date: '2016-05-04',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
+  data() {
+    return {
+      dialogTableVisible: false,
+    }
   },
-  {
-    date: '2016-05-01',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-03',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-]
+  methods: {
+    formatDate(Date) {
+      return formatDate(Date);
+    },
+    getStatus(status) {
+      return statusHandler.getStatus(status);
+    }
+  }
+}
 </script>
 
 <template>
@@ -45,37 +28,36 @@ const gridData = [
       Chi tiết
     </el-button>
 
-    <el-dialog v-model="dialogTableVisible" title="Thông tin phiếu mượn" width="640">
-      <!-- <el-table :data="gridData">
-        <el-table-column property="date" label="Date" width="150" />
-        <el-table-column property="name" label="Name" width="200" />
-        <el-table-column property="address" label="Address" />
-      </el-table> -->
+    <el-dialog v-model="dialogTableVisible" width="640">
       <div class="modal-borrow">
         <div class="row">
           <div class="col-5 modal-img">
-            <img src="https://nhatrangbooks.com/wp-content/uploads/2019/10/015.u2377.d20160630.t155059-600x848.jpg" alt="">
+            <img :src="data.maSach?.anhBia" :alt="data.maSach?.tenSach">
           </div>
           <div class="col-7">
-            <div class="mb-3">
+            <div class="mb-3 pl-2 pr-3 modal-borderBottom">
               <span class="info-title">Đọc giả: </span>
-              <span class="info-desc">Nguyen Van A</span>
+              <span class="info-desc">{{ `${data.maDocGia?.hoLot} ${data.maDocGia?.ten}`}}</span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pl-2 pr-3">
               <span class="info-title">Tên sách: </span>
-              <span class="info-desc">Nguyen Van A</span>
+              <span class="info-desc">{{ data.maSach?.tenSach }}</span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pl-2 pr-3">
               <span class="info-title">Số lượng: </span>
-              <span class="info-desc">Nguyen Van A</span>
+              <span class="info-desc">{{ data.soLuongMuon }}</span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pl-2 pr-3 modal-borderBottom">
+              <span class="info-title">Trạng thái: </span>
+              <span class="info-desc">{{ getStatus(data.trangThai) }}</span>
+            </div>
+            <div class="mb-3 pl-2 pr-3">
               <span class="info-title">Ngày mượn: </span>
-              <span class="info-desc">Nguyen Van A</span>
+              <span class="info-desc">{{ formatDate(data.ngayMuon) }}</span>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pl-2 pr-3">
               <span class="info-title">Ngày trả: </span>
-              <span class="info-desc">Nguyen Van A</span>
+              <span class="info-desc">{{ formatDate(data.ngayTra) }}</span>
             </div>
           </div>
         </div>

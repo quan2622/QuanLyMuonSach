@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getTokenFromCookie } from "@/stores/user.store"
+import { ElMessage } from "element-plus";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -103,7 +105,39 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: "/error-login",
+      name: "auth-login",
+      component: () => import("@/views/Authen.Login.vue"),
+    },
+    {
+      path: "/error-authen",
+      name: "auth-admin",
+      component: () => import("@/views/Admin.Authen.Login.vue"),
+    },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const token = getTokenFromCookie();
+  if (to.path === "/borrow" || to.name === "detail") {
+    if (!token) {
+      ElMessage.error("Vui lòng đăng nhập !");
+      next({ name: 'auth-login', query: { redirect: to.fullPath } })
+    } else {
+      next();
+    }
+  } else if (to.path.startsWith("/admin") && to.path != "/admin/login") {
+    if (!token) {
+      ElMessage.error("Bạn không có quyền truy cập!");
+      console.log('chay vao day ' + token);
+      next({ name: 'auth-admin' });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 })
 
 export default router

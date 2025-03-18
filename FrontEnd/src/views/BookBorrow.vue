@@ -72,7 +72,6 @@ export default {
         <table class="table table-hover table-sm">
           <thead>
             <tr>
-              <!-- <th><input type="checkbox" name="checkall" /></th> -->
               <th>STT</th>
               <th>Ảnh bìa</th>
               <th>Tên sách</th>
@@ -85,9 +84,10 @@ export default {
           </thead>
           <tbody>
             <tr v-for="(data, index) in borrowStore.formatDateTime" :key="data._id" :class="{'table-active': data.trangThai === 'borrowed'}">
-              <!-- <td><input type="checkbox" name="id" value="1" /></td> -->
               <td>{{ index+1 }}</td>
-              <td><img :src="data?.anhBia" alt="Sản phẩm" width="100px" /></td>
+              <td>
+                <img :src="data.maSach?.anhBia" alt="Sản phẩm" width="100px" />
+              </td>
               <td>{{ data.maSach.tenSach }}</td>
               <td style="width: 120px; text-align: center;">
                 {{ data.soLuongMuon }}

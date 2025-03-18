@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main">
       <h1 class="title-page">Thông Tin Nhân Viên</h1>
       <div class="profile-contain mt-4">

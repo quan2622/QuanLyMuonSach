@@ -25,7 +25,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main ad-form">
       <h1 class="title-page">Chỉnh sửa thông tin sách</h1>
       <CreateBook :book="book" :id="id"></CreateBook>

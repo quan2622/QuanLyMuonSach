@@ -59,7 +59,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main">
       <h1 class="title-page">Danh Mục Nhà Xuất Bản</h1>
       <div style="padding: 0 30px">

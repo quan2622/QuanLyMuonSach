@@ -1,8 +1,10 @@
 <script>
 import { useBorrowStore } from "@/stores/borrow.store";
 import ModalBorrow from "./modal-borrow.vue";
-import moment from "moment";
 import { ElMessage, ElMessageBox } from "element-plus";
+import formatDate from "@/helper/formatDate";
+import { statusHandler } from "@/helper/handleStatusBorrow"
+import moment from "moment";
 
 export default {
   components: {
@@ -11,31 +13,27 @@ export default {
   data() {
     return {
       borrowStore: useBorrowStore(),
+      approvalStatus: {},
+      timer: null,
     }
   },
   async mounted() {
     if (!this.borrowStore.fetching) {
       await this.borrowStore.getAllAdmin();
       console.log(this.borrowStore.dataBorrow);
+      this.handleConfirm();
+      this.timer = setInterval(this.handleConfirm, 30);
     }
   },
   methods: {
     formatDate(date) {
-      return date ? moment(date).format("DD/MM/YYYY") : "--/--/----";
+      return formatDate(date);
     },
     getStatusClass(status) {
-      switch (status) {
-        case 'waiting': return 'btn btn-status btn-warning'
-        case 'borrowed': return 'btn btn-status btn-primary'
-        case 'return': return 'btn btn-status btn-success disabled'
-      }
+      return statusHandler.getStatusClass(status);
     },
     getStatus(status) {
-      switch (status) {
-        case 'waiting': return 'Chờ duyệt'
-        case 'borrowed': return 'Đang mượn'
-        case 'return': return 'Đã trả'
-      }
+      return statusHandler.getStatus(status);
     },
     async changeStatus(borrowId, status) {
       if (status == "return") {
@@ -112,13 +110,26 @@ export default {
     },
     handleBtnDelete(status) {
       return status == "borrowed" ? "disabled" : "";
-    }
+    },
+    handleConfirm() {
+      const currentTime = moment();
+      this.borrowStore.dataBorrow.forEach((record) => {
+        if (record.trangThai == 'waiting') {
+          const createdTime = moment(record.createdAt);
+          const diffInMinutes = currentTime.diff(createdTime, "seconds");
+          this.approvalStatus[record._id] = diffInMinutes >= 60;
+        }
+      });
+    },
   },
+  beforeUnmount() {
+    clearInterval(this.timer);
+  }
 }
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main">
       <h1 class="title-page">Danh Mục Sách</h1>
       <div style="padding: 0 30px">
@@ -152,14 +163,14 @@ export default {
                   <td class="limit-char">{{ data.maSach.tenSach }}</td>
                   <td>{{ data.soLuongMuon }}</td>
                   <td>
-                    <a :class="getStatusClass(data.trangThai)" href="javascript:;" @click="changeStatus(data._id, data.trangThai)">
+                    <a :class="[getStatusClass(data.trangThai), {'disabled': !approvalStatus[data._id] && data.trangThai == 'waiting'}]" href="javascript:;" @click="changeStatus(data._id, data.trangThai)">
                       {{ getStatus(data.trangThai) }}
                     </a>
                   </td>
                   <td>{{ formatDate(data?.ngayMuon) }}</td>
                   <td>{{ formatDate(data?.ngayTra) }}</td>
                   <td class="d-flex">
-                    <ModalBorrow></ModalBorrow>
+                    <ModalBorrow :data="borrowStore.detailBorrow(data._id)"></ModalBorrow>
                     <a class="btn btn-sm ml-1 btn-danger" :class="handleBtnDelete(data.trangThai)"  @click="handleDelete(data._id, data.trangThai)">
                       Xóa
                     </a>

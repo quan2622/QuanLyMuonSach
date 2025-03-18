@@ -10,14 +10,14 @@ export default {
     }
   },
   methods: {
-    handleSignOut(user) {
+    async handleSignOut(user) {
       user.SignOut();
       ElMessage({
         message: 'Đăng xuất thành công',
         type: 'warning',
         plain: true,
       })
-      this.$router.push('/')
+      this.$router.push('/');
     },
     handleNavToLogin() {
       this.$router.push('/login')
@@ -62,7 +62,6 @@ export default {
       <button class="btn-getstarted" v-else @click="handleSignOut(userStore)">
         Đăng Xuất
       </button>
-      <!-- <a class="btn-getstarted" href="">Đăng xuất</a> -->
     </div>
   </header>
 </template>

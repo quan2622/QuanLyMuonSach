@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <main>
+  <main class="main-right">
     <div class="content-main ad-form">
       <h1 class="title-page">Thêm Thông Tin Sách Mới</h1>
       <CreateBook :book="book"></CreateBook>
