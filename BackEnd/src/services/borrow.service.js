@@ -5,6 +5,7 @@ class borrowService {
   async getAllForAdmin() {
     const record = await borrowModel
       .find()
+      .sort({ createdAt: 'desc' })
       .populate("maDocGia", ["hoLot", "ten", "dienThoai"])
       .populate("maSach", ["tenSach", "donGia", "soQuyen", "namXuatBan","anhBia"])
       .populate("maNhanVien", ["hoTenNV", "chucVu", "soDienThoai"]);
@@ -111,7 +112,7 @@ class borrowService {
   }
 
   async getAllForUser(userId) {
-    const record = await borrowModel.find({ maDocGia: userId }).populate('maSach', ["tenSach", "donGia","namXuatBan","anhBia"]);
+    const record = await borrowModel.find({ maDocGia: userId }).sort({ createdAt: 'desc' }).populate('maSach', ["tenSach", "donGia","namXuatBan","anhBia"]);
     if (!record) return { message: "Không tìm thấy phiếu mượn" };
     return {
       dataBorrow: record,

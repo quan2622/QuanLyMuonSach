@@ -11,6 +11,11 @@ export default {
     return {
       bookStore: useBookStore()
     }
+  },
+  computed: {
+    handleFilter() {
+      return this.bookStore.filterBook.filter(book => book.soQuyen > 0);
+    }
   }
 }
 </script>
@@ -30,28 +35,10 @@ export default {
     </div>
     <div class="good_container container">
       <div class="row">
-        <CardItem v-for="book in bookStore.filterBook" :key="book._id" :data="book"></CardItem>
+        <CardItem v-for="book in handleFilter" :key="book._id" :data="book"></CardItem>
       </div>
     </div>
   </main>
-  <!-- <div class="container">
-    <div class="row">
-      <input
-        type="text"
-        placeholder="Nhập tên sách cần tìm kiếm"
-        @input="(event) => bookStore.handleChangeTxtSearch(event.target.value)"/>
-    </div>
-    <div class="row mt-2">
-      <div class="card col-md-3 mt-3" v-for="book in bookStore.filterBook" :key="book._id" >
-        <img class="card-img-top" src="https://img1.od-cdn.com/ImageType-400/2497-1/0B5/1C4/E6/%7B0B51C4E6-3B22-4BC9-8D9F-0DCAF12CF7E8%7DImg400.jpg" alt="Card image cap"/>
-        <div class="card-body">
-          <h4 class="card-title">{{ book.tenSach }}</h4>
-          <i>{{ book.tacGia }}</i>
-          <h5>{{ book.donGia }}</h5>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <style scoped>

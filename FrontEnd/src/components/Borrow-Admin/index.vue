@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       borrowStore: useBorrowStore(),
+      statusFilter: "",
     }
   },
   async mounted() {
@@ -107,6 +108,14 @@ export default {
       return status == "borrowed" ? "disabled" : "";
     },
   },
+  computed: {
+    borrowFilterStatus() {
+      if (this.statusFilter) {
+        return this.borrowStore.filterBorrowId.filter((data) => data.trangThai == this.statusFilter);
+      }
+      return this.borrowStore.filterBorrowId;
+    }
+  }
 }
 </script>
 
@@ -123,6 +132,15 @@ export default {
               placeholder="Nhập ID hoặc tên người dùng"
               @input="borrowStore.handleChangeTxtSearch($event.target.value)"
             />
+            <div class="box-filter">
+              <label for="boxFilter">Bộ lọc:</label>
+              <select v-model="statusFilter" id="boxFilter">
+                <option value="">--Tất cả--</option>
+                <option value="waiting">Đang chờ</option>
+                <option value="borrowed">Đang mượn</option>
+                <option value="return">Đã trả</option>
+              </select>
+            </div>
           </div>
           <div class="card-body">
             <table class="table table-hover table-sm">
@@ -139,7 +157,7 @@ export default {
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="data in borrowStore.filterBorrowId" :key="data._id">
+                <tr v-for="data in borrowFilterStatus" :key="data._id">
                   <td>{{ data._id }}</td>
                   <td> {{ `${data.maDocGia.hoLot} ${data.maDocGia.ten}` }}</td>
                   <td class="limit-char">{{ data.maSach.tenSach }}</td>

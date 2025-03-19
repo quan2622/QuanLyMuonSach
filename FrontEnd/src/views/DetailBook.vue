@@ -130,7 +130,7 @@ export default {
 
                         <div class="row">
                             <div class="product__btn">
-                                <button @click="handleBorrow" class="col-lg-5 col-md-6 col-12 product--add-cart">
+                                <button @click="handleBorrow" class="col-lg-5 col-md-6 col-12 product--add-cart btn" :disabled="bookDetail.soQuyen==0">
                                     <i class="fa-solid fa-cart-plus"></i>
                                     Mượn sách
                                 </button>

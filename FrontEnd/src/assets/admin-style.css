@@ -331,3 +331,34 @@ main .ad-form {
 /* Modal */
 
 /* Borrow */
+/* Box - filter */
+.box-filter {
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 2px solid #ce1212;
+}
+
+.box-filter label {
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+.box-filter #boxFilter{
+  padding: 6px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.box-filter #boxFilter option {
+  font-size: 16px;
+  /* padding: 20px 0; */
+}
+
+.box-filter #boxFilter option:checked {
+  background: #ff5a5a;
+  color: white;
+}
+/* Box - filter */
