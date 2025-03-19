@@ -3,8 +3,7 @@ import { useBorrowStore } from "@/stores/borrow.store";
 import ModalBorrow from "./modal-borrow.vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import formatDate from "@/helper/formatDate";
-import { statusHandler } from "@/helper/handleStatusBorrow"
-import moment from "moment";
+import { statusHandler } from "@/helper/handleStatusBorrow";
 
 export default {
   components: {
@@ -13,16 +12,12 @@ export default {
   data() {
     return {
       borrowStore: useBorrowStore(),
-      approvalStatus: {},
-      timer: null,
     }
   },
   async mounted() {
     if (!this.borrowStore.fetching) {
       await this.borrowStore.getAllAdmin();
       console.log(this.borrowStore.dataBorrow);
-      this.handleConfirm();
-      this.timer = setInterval(this.handleConfirm, 30);
     }
   },
   methods: {
@@ -111,20 +106,7 @@ export default {
     handleBtnDelete(status) {
       return status == "borrowed" ? "disabled" : "";
     },
-    handleConfirm() {
-      const currentTime = moment();
-      this.borrowStore.dataBorrow.forEach((record) => {
-        if (record.trangThai == 'waiting') {
-          const createdTime = moment(record.createdAt);
-          const diffInMinutes = currentTime.diff(createdTime, "seconds");
-          this.approvalStatus[record._id] = diffInMinutes >= 60;
-        }
-      });
-    },
   },
-  beforeUnmount() {
-    clearInterval(this.timer);
-  }
 }
 </script>
 
@@ -163,7 +145,7 @@ export default {
                   <td class="limit-char">{{ data.maSach.tenSach }}</td>
                   <td>{{ data.soLuongMuon }}</td>
                   <td>
-                    <a :class="[getStatusClass(data.trangThai), {'disabled': !approvalStatus[data._id] && data.trangThai == 'waiting'}]" href="javascript:;" @click="changeStatus(data._id, data.trangThai)">
+                    <a :class="getStatusClass(data.trangThai)" href="javascript:;" @click="changeStatus(data._id, data.trangThai)">
                       {{ getStatus(data.trangThai) }}
                     </a>
                   </td>
