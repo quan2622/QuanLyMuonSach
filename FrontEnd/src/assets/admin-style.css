@@ -183,6 +183,16 @@ main .content-main {
   border-bottom: 1px solid #ce1212;
   margin-bottom: 10px;
 }
+
+.profile .title-option {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profile .option {
+  font-size: 17px;
+  font-weight: 400;
+}
 /* Book */
 /* Detail */
 .avatar .img-book {

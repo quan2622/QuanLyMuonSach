@@ -7,8 +7,10 @@ const staffSchema = new mongoose.Schema(
     passWord: { type: String, require: true },
     token: { type: String, default: generate.generateRandomString(20)},
     chucVu: String,
-    diachi: String,
-    soDienThoai: {type: String, require: true },
+    diaChi: String,
+    soDienThoai: { type: String, require: true },
+    anhNV: String,
+    email: { type: String, require: true },
   },
   {
     timestamps: true,

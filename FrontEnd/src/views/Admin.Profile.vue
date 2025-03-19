@@ -24,9 +24,9 @@ export default {
         <div class="row">
           <div class="col-4">
             <div class="avatar">
-              <img src="https://bootstrapmade.com/content/demo/NiceAdmin/assets/img/profile-img.jpg" alt="Ảnh">
+              <img :src="userStore.admin.anhNV" :alt="userStore.admin.hoTenNV">
               <h2>{{ userStore.admin.hoTenNV }}</h2>
-              <i>Quản trị viên</i>
+              <i>{{ userStore.admin.chucVu }}</i>
               <!-- <div class="staff-social">
                 <i class="fa-brands fa-twitter"></i>
                 <i class="fa-brands fa-facebook-f"></i>
@@ -37,13 +37,21 @@ export default {
           <div class="col-8">
             <div class="profile">
               <h2>Thông tin chi tiết</h2>
-              <div class="row">
+              <div class="row mb-3">
                 <div class="col-3 title-option">Tên:</div>
                 <div class="col-9 option">{{ userStore.admin.hoTenNV }}</div>
               </div>
-              <div class="row">
+              <div class="row mb-3">
                 <div class="col-3 title-option">Số điện thoại:</div>
                 <div class="col-9 option">{{ userStore.admin.soDienThoai }}</div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3 title-option">Email:</div>
+                <div class="col-9 option">{{ userStore.admin.email }}</div>
+              </div>
+              <div class="row">
+                <div class="col-3 title-option">Địa chỉ:</div>
+                <div class="col-9 option">{{ userStore.admin.diaChi }}</div>
               </div>
             </div>
           </div>
