@@ -15,6 +15,7 @@ export const useUserStore = defineStore("user", {
       user: {},
       admin: {},
       status: false,
+      fetching: false,
     }
   },
 
@@ -42,6 +43,15 @@ export const useUserStore = defineStore("user", {
         .catch((err) => console.log(err))
     },
     // Admin
+    async getProfile() {
+      return await axiosInstance.post("/admin/account/profile", {}, { headers: { Authorization: `Bearer ${this.token}` } })
+        .then((res) => {
+          this.admin = res.data;
+          this.fetching = true;
+        })
+        .catch((err) => console.log(err))
+    },
+
     async SignUpAdmin(data) {
       return await axiosInstance.post("/admin/account", data)
         .then((res) => {

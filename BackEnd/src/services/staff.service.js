@@ -20,6 +20,11 @@ class staffService {
       }
     }
   }
+
+  async getData(staffToken) {
+    const data = await staffModel.findOne({ token: staffToken });
+    return data;
+  }
 }
 
 module.exports = new staffService;

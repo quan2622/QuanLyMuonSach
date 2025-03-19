@@ -6,6 +6,12 @@ export default {
     return {
       userStore: useUserStore(),
     }
+  },
+  async created() {
+    if (!this.userStore.fetching) {
+      await this.userStore.getProfile();
+      console.log(this.userStore.admin);
+    }
   }
 }
 </script>

@@ -2,6 +2,18 @@ const ApiError = require("../../api-error");
 const staffService = require("../../services/staff.service");
 
 class staffController {
+  // POST admin/account/
+  async getProfile(req, res, next) {
+    try {
+      const staffToken = req.headers.authorization.split(" ")[1];
+      const record = await staffService.getData(staffToken);
+      return res.json(record);
+    } catch (error) {
+      return next(new ApiError(404, "Không tìm thấy tài khoản nhân viên"));
+    }
+  }
+
+
   // POST admin/account
   async create(req, res, next) {
     if (!req.body.hoTenNV) return next(new ApiError(400, "Vui lòng nhập tên NV"));
