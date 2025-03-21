@@ -158,7 +158,7 @@ main .title-page h3 {
   opacity: 1;
   visibility: visible;
   z-index: 9;
-  bottom: 10px;
+  bottom: 20px;
 }
 .good_container .inner-item-product .item-image {
   margin-bottom: 0;
@@ -170,8 +170,9 @@ main .title-page h3 {
   padding: 10px;
 }
 .good_container .inner-item-product .item-image img {
-  width: 300px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 230px;
+  max-height: 300px;
   aspect-ratio: auto 300/300;
   height: auto;
   vertical-align: middle;
@@ -233,12 +234,22 @@ main .title-page h3 {
   -webkit-line-clamp: 2;
   padding: 0 10px;
   cursor: pointer;
+  min-height: 39px;
 }
-.good_container .inner-item-product .inner-price {
-  text-align: center;
+
+.good_container .inner-item-product .inner-author {
+  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
+}
+
+.good_container .inner-item-product .inner-price {
+  text-align: center;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
   /* margin: 10px 0; */
 }
 
@@ -321,6 +332,7 @@ main .title-page h3 {
   /* flex-direction: column; */
   justify-content: space-between;
   row-gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .product__info .product__content .product__price {
@@ -507,6 +519,9 @@ footer {
   background: #ba1111;
   color: #fff;
   font-weight: 500;
+  /* position: fixed; */
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-info {
@@ -605,6 +620,28 @@ footer {
 .authen p {
   margin: 0;
 }
-
-
 /* Authen Login */
+/* CSS Bảng */
+.anhBia_index {
+  box-shadow: 1px 1px 10px #cecece;
+}
+.tacGia_index {
+  max-width: 150px;
+}
+.space_index {
+  max-width: 50px;
+}
+.tenSach_index {
+  max-width: 265px;
+}
+
+.tenSach_index, .tacGia_index {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/* CSS Bảng */
+
+

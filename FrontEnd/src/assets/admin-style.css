@@ -201,6 +201,7 @@ main .content-main {
   object-fit: cover;
   object-position: center;
   margin: 30px 0;
+  box-shadow: 1px 1px 10px #cecece;
 }
 
 .info-book {
@@ -239,12 +240,12 @@ main .ad-form {
 }
 /* Create */
 /* Publisher */
-.limit-char {
+/* .limit-char {
   width: 300px; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
-}
+} */
 
 
 .box-search {
@@ -362,3 +363,9 @@ main .ad-form {
   color: white;
 }
 /* Box - filter */
+/* Common */
+.table-sm td, .table-sm th {
+  padding: 0.7rem;
+}
+
+/* Common */

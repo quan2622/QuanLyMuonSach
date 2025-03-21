@@ -67,7 +67,10 @@ export default {
     <h1 class="text-center m-4">Danh sách phiếu mượn sách</h1>
 
     <div class="card mb-3">
-      <div class="card-header">Danh sách</div>
+      <div class="card-header">
+        Danh sách
+        <span class="header-note">Vui lòng đọc kỹ phần chú ý bên dưới nhé!</span>
+      </div>
       <div class="card-body">
         <table class="table table-hover table-sm">
           <thead>
@@ -75,7 +78,8 @@ export default {
               <th>STT</th>
               <th>Ảnh bìa</th>
               <th>Tên sách</th>
-              <th>Số lượng mượn</th>
+              <th>Số lượng</th>
+              <th>Tổng tiền</th>
               <th>Trạng thái</th>
               <th>Ngày mượn</th>
               <th>Ngày trả</th>
@@ -92,6 +96,7 @@ export default {
               <td style="width: 120px; text-align: center;">
                 {{ data.soLuongMuon }}
               </td>
+              <td class="price_borrow">{{ data.maSach.donGia*data.soLuongMuon }} VNĐ</td>
               <td>
                 <span :class="{
                   'badge': true,
@@ -105,15 +110,6 @@ export default {
               <td>{{ data.ngayMuon }}</td>
               <td>{{ data.ngayTra }}</td>
               <td>
-                <!-- <a class="btn btn-info btn-sm" href="/admin/products/detail/1">
-                  Chi tiết
-                </a>
-                <a
-                  class="btn btn-warning btn-sm ml-1"
-                  href="/admin/products/edit/1"
-                >
-                  Sửa
-                </a> -->
                 <button class="btn btn-sm ml-1" 
                 :class="{
                   'btn-secondary': data.trangThai === 'borrowed',
@@ -129,5 +125,39 @@ export default {
         </table>
       </div>
     </div>
+    <div class="mb-3">
+      <div class="note-title">*Chú ý:</div>
+      <div class="note-borrow">
+        <ol>
+          <li>Thời gian mượn sách tối đa là <strong><i>5 ngày</i></strong> kể từ ngày mượn.</li>
+          <li>Vui lòng thanh toán <strong><i>tiền mượn</i></strong> khi nhận sách tại quầy.</li>
+          <li>Khi đăng ký phiếu mượn chỉ có hiệu lực trong ngày.</li>
+        </ol>
+      </div>
+    </div>
   </main>
 </template>
+<style scoped>
+.price_borrow {
+  font-weight: 500;
+  color: #ce1212;
+}
+
+.header-note {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #ce1212;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.note-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ce1212;
+}
+.note-borrow {
+  font-size: 18px;
+}
+</style>
+

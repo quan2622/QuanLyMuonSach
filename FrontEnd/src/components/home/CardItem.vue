@@ -28,7 +28,7 @@ export default {
       </div>
       <div class="inner-content">
         <h3 class="inner-title">{{ data.tenSach }}</h3>
-        <i>{{ data.tacGia }}</i>
+        <i class="inner-author">{{ data.tacGia }}</i>
 
         <div class="inner-price">
           <div class="current-price">{{ data.donGia }}</div>

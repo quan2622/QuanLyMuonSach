@@ -31,7 +31,7 @@ export default {
     getStatus(status) {
       return statusHandler.getStatus(status);
     },
-    async changeStatus(borrowId, status) {
+    async changeStatus(borrowId, status, borrowPrice) {
       if (status == "return") {
         ElMessage({
           message: 'Không thể thay đổi!',
@@ -49,7 +49,7 @@ export default {
 
         try {
           if (status == 'waiting') {
-            await this.showConfirmMessage("Xác nhận cho mượn sách");
+            await this.showConfirmMessage(`Thu tiền thuê ${borrowPrice} VNĐ !`);
           } else if (status == "borrowed") {
             await this.showConfirmMessage("Xác nhận hoàn tất trả sách");
           };
@@ -68,7 +68,7 @@ export default {
     showConfirmMessage(message) {
       return ElMessageBox.confirm(
         message,
-        'Warning',
+        'Nhắc nhở',
         {
           confirmButtonText: "Xác nhận",
           cancelButtonText: "Hủy",
@@ -160,10 +160,10 @@ export default {
                 <tr v-for="data in borrowFilterStatus" :key="data._id">
                   <td>{{ data._id }}</td>
                   <td> {{ `${data.maDocGia.hoLot} ${data.maDocGia.ten}` }}</td>
-                  <td class="limit-char">{{ data.maSach.tenSach }}</td>
+                  <td class="limit-char tenSach_index">{{ data.maSach.tenSach }}</td>
                   <td>{{ data.soLuongMuon }}</td>
                   <td>
-                    <a :class="getStatusClass(data.trangThai)" href="javascript:;" @click="changeStatus(data._id, data.trangThai)">
+                    <a :class="getStatusClass(data.trangThai)" href="javascript:;" @click="changeStatus(data._id, data.trangThai, data.soLuongMuon*data.maSach?.donGia)">
                       {{ getStatus(data.trangThai) }}
                     </a>
                   </td>

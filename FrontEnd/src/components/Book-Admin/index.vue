@@ -75,7 +75,7 @@ export default {
               <thead>
                 <tr>
                   <!-- <th><input type="checkbox" name="checkall" /></th> -->
-                  <th>STT</th>
+                  <th class="space_index">STT</th>
                   <th>Ảnh bìa</th>
                   <th>Tên sách</th>
                   <th>Tác giả</th>
@@ -88,10 +88,10 @@ export default {
               <tbody>
                 <tr v-for="(data, index) in bookStore.filterBook" :key="data._id">
                   <!-- <td><input type="checkbox" name="id" value="1" /></td> -->
-                  <td>{{ index+1 }}</td>
-                  <td><img :src="data.anhBia" :alt="data.tenSach" width="100px" /></td>
-                  <td>{{ data.tenSach }}</td>
-                  <td>{{ data.tacGia }}</td>
+                  <td class="space_index">{{ index+1 }}</td>
+                  <td><img :src="data.anhBia" :alt="data.tenSach" width="100px" class="anhBia_index"/></td>
+                  <td class="tenSach_index">{{ data.tenSach }}</td>
+                  <td class="tacGia_index">{{ data.tacGia }}</td>
                   <td>
                     <span class="badge" :class="{
                       'badge-primary': handleStatus(data.soQuyen),
