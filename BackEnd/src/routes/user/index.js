@@ -9,5 +9,5 @@ module.exports = (app) => {
   app.use("/account", userRoutes);
   app.use("/auth", authRoutes);
   app.use("/home", homeRoutes);
-  app.use("/borrow", authMiddleware.requireAuthUser, borrowRoutes);
+  app.use("/borrow", authMiddleware.authenTokenUser, borrowRoutes);
 };

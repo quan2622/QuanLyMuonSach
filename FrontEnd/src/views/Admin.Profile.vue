@@ -27,11 +27,6 @@ export default {
               <img :src="userStore.admin.anhNV" :alt="userStore.admin.hoTenNV">
               <h2>{{ userStore.admin.hoTenNV }}</h2>
               <i>{{ userStore.admin.chucVu }}</i>
-              <!-- <div class="staff-social">
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
-              </div> -->
             </div>
           </div>
           <div class="col-8">

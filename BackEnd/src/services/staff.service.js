@@ -21,8 +21,8 @@ class staffService {
     }
   }
 
-  async getData(staffToken) {
-    const data = await staffModel.findOne({ token: staffToken });
+  async getData(staffId) {
+    const data = await staffModel.findOne({ _id: staffId });
     return data;
   }
 }

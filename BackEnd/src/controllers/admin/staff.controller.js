@@ -5,8 +5,8 @@ class staffController {
   // POST admin/account/
   async getProfile(req, res, next) {
     try {
-      const staffToken = req.headers.authorization.split(" ")[1];
-      const record = await staffService.getData(staffToken);
+      const id = req.headers.authorization.split(" ")[1];
+      const record = await staffService.getData(id);
       return res.json(record);
     } catch (error) {
       return next(new ApiError(404, "Không tìm thấy tài khoản nhân viên"));

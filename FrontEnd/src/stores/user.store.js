@@ -36,15 +36,18 @@ export const useUserStore = defineStore("user", {
     async SignIn(data) {
       return await axiosInstance.post("/auth/signIn", data)
         .then((res) => {
-          this.token = res.data.accountInfo?.token;
+          this.token = res.data.token;
           document.cookie = `token=${this.token}; path=/; max-age=${7 * 24 * 60 * 60}; secure; SameSite=Lax`;
+          localStorage.setItem("dataId", res.data.accountInfo._id);
           this.user = res.data.accountInfo;
         })
         .catch((err) => console.log(err))
     },
     // Admin
     async getProfile() {
-      return await axiosInstance.post("/admin/account/profile", {}, { headers: { Authorization: `Bearer ${this.token}` } })
+      const id = localStorage.getItem('dataId');
+      console.log(id);
+      return await axiosInstance.post("/admin/account/profile", {}, { headers: { Authorization: `Bearer ${id}` } })
         .then((res) => {
           this.admin = res.data;
           this.fetching = true;
@@ -65,8 +68,10 @@ export const useUserStore = defineStore("user", {
     async SignInAdmin(data) {
       return await axiosInstance.post("admin/auth/signIn", data)
         .then((res) => {
-          this.token = res.data.accountInfo?.token;
-          document.cookie = `token=${this.token}; path=/; max-age=${7 * 24 * 60 * 60}; secure; SameSite=Lax`;
+          console.log("Token mới: " + res.data.token);
+          this.token = res.data.token;
+          document.cookie = `token=${this.token}; path=/; max-age=${60 * 60}; secure; SameSite=Lax`;
+          localStorage.setItem("dataId", res.data.accountInfo._id);
           this.admin = res.data.accountInfo;
         })
         .catch((err) => console.log(err))
@@ -75,6 +80,7 @@ export const useUserStore = defineStore("user", {
     async SignOut() {
       await axiosInstance.get("/auth/signOut")
       this.token = null;
+      localStorage.clear('dataId');
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; max-age=0";
     }    
   }

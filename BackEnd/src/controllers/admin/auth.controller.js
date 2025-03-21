@@ -12,6 +12,7 @@ class authController {
       // res.cookie("token", data.accountInfo.token,  { httpOnly: true, secure: true, sameSite: "Strict" });
       res.status(200).json(data);
     } catch (error) {
+      console.log(error);
       return next(new ApiError(500, "Lỗi không thể đăng nhập"));
     }
   }

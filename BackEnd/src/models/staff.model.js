@@ -5,7 +5,7 @@ const staffSchema = new mongoose.Schema(
   {
     hoTenNV: { type: String, require: true },
     passWord: { type: String, require: true },
-    token: { type: String, default: generate.generateRandomString(20)},
+    // token: { type: String, default: generate.generateRandomString(20)},
     chucVu: String,
     diaChi: String,
     soDienThoai: { type: String, require: true },
