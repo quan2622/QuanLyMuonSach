@@ -122,7 +122,7 @@ export default {
 <template>
   <main class="main-right">
     <div class="content-main">
-      <h1 class="title-page">Danh Mục Sách</h1>
+      <h1 class="title-page">Danh Mục Phiếu Mượn</h1>
       <div style="padding: 0 30px">
         <div class="card mt-4 mb-4">
           <div class="card-header">

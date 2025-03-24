@@ -118,7 +118,7 @@ main .content-main {
   position: relative;
   left: 200px;
   width: calc(100% - 215px);
-  min-height: 650px;
+  min-height: 700px;
 }
 
 .content-main .title-page {

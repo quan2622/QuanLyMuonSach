@@ -125,7 +125,7 @@ export default {
                         </div>
                         <div id="buy-amount">
                             <span class="buy-amount-title">Số lượng: </span>
-                            <el-input-number v-model="soLuongMuon" :min="1" :max="10" @change="handleChangeQuantity" />
+                            <el-input-number v-model="soLuongMuon" :min="1" :max="bookDetail.soQuyen" @change="handleChangeQuantity" />
                         </div>
 
                         <div class="row">
@@ -148,3 +148,8 @@ export default {
     </div>
   </main>
 </template>
+<style scoped>
+.title-page {
+  margin-bottom: 40px;
+}
+</style>
