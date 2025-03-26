@@ -4,7 +4,7 @@ const userModel = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
 module.exports.authenTokenAdmin = async (req, res, next) => {
-  console.log(`Token admin: ${req.cookies.token}`);
+  // console.log(`Token admin: ${req.cookies.token}`);
   try {
     const token = req.cookies.token;
     if (!token) return next(new ApiError(401, "Vui lòng đăng nhập"));
@@ -14,7 +14,7 @@ module.exports.authenTokenAdmin = async (req, res, next) => {
       return next(new ApiError(401, "Vui lòng đăng nhập đúng tài khoản"));
     }
     res.locals.user = record;
-    console.log(res.locals.user);
+    // console.log(res.locals.user);
     next();
   } catch (error) {
     console.log(error);
@@ -23,7 +23,7 @@ module.exports.authenTokenAdmin = async (req, res, next) => {
 }
 
 module.exports.authenTokenUser = async (req, res, next) => {
-  console.log(`Token User: ${req.cookies.token}`);
+  // console.log(`Token User: ${req.cookies.token}`);
   try {
     const token = req.cookies.token;
     if (!token) return next(new ApiError(401, "Vui lòng đăng nhập"));

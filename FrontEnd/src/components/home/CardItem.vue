@@ -31,7 +31,7 @@ export default {
         <i class="inner-author">{{ data.tacGia }}</i>
 
         <div class="inner-price">
-          <div class="current-price">{{ data.donGia }}</div>
+          <div class="current-price">{{ data.donGia }} VNĐ</div>
         </div>
         <div class="product-footer">
           <span class="product-center">{{ data.soLuongDaMuon }} đã mượn</span>

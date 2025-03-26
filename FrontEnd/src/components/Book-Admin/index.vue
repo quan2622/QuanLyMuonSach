@@ -15,8 +15,8 @@ export default {
     }
   },
   methods: {
-    handleStatus(soLuong) {
-      return soLuong != 0;
+    handleStatus(soLuong, slMuon) {
+      return soLuong != slMuon;
     },
     handleDeleteBook(bookId) {
       ElMessageBox.confirm(
@@ -94,13 +94,13 @@ export default {
                   <td class="tacGia_index">{{ data.tacGia }}</td>
                   <td>
                     <span class="badge" :class="{
-                      'badge-primary': handleStatus(data.soQuyen),
-                      'badge-warning': handleStatus(data.soQuyen) == false,
+                      'badge-primary': handleStatus(data.soQuyen, data.soLuongDaMuon),
+                      'badge-warning': handleStatus(data.soQuyen, data.soLuongDaMuon) == false,
                     }" style="cursor: default;">
-                      {{ handleStatus(data.soQuyen) == true? "Còn hàng" : "Hết hàng" }}
+                      {{ handleStatus(data.soQuyen, data.soLuongDaMuon) == true? "Còn hàng" : "Hết hàng" }}
                     </span>
                   </td>
-                  <td><span style="padding-left: 20px;">{{ data.soQuyen }}</span></td>
+                  <td><span style="padding-left: 20px;">{{ data.soQuyen - data.soLuongDaMuon }}</span></td>
                   <td><span style="padding-left: 20px;">{{ data.soLuongDaMuon }}</span></td>
                   <td>
                     <button class="btn btn-info btn-sm" @click="handleNavToDeTail(data._id)">

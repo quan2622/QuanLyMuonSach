@@ -49,7 +49,7 @@ export default {
 
         try {
           if (status == 'waiting') {
-            await this.showConfirmMessage(`Thu tiền thuê ${borrowPrice} VNĐ !`);
+            await this.showConfirmMessage(`Thu tiền mượn sách ${borrowPrice} VNĐ !`);
           } else if (status == "borrowed") {
             await this.showConfirmMessage("Xác nhận hoàn tất trả sách");
           };
@@ -191,5 +191,9 @@ export default {
   padding: 3px 0;
   width: 80px;
   border-radius: 50px;
+}
+.limit-char {
+  max-width: 200px;
+  white-space: pre-wrap;
 }
 </style>

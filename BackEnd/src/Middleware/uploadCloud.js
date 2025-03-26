@@ -11,7 +11,7 @@ const streamifier = require('streamifier')
 cloudinary.config({ 
   cloud_name: 'dchv5jtrl', 
   api_key: '596437523493551', 
-  api_secret: 'd7f0BWnR7XBbi23kw5R-SOykr6c' // Click 'View API Keys' above to copy your API secret
+  api_secret: 'd7f0BWnR7XBbi23kw5R-SOykr6c'
 });
 
 module.exports.upload = (req, res, next) => {

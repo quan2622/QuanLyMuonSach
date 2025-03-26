@@ -19,7 +19,7 @@ export default {
     <div class="mainFrom row">
       <div class="col-5 left-panel d-flex flex-column align-items-center justify-content-center">
           <h2>ADMIN</h2>
-          <div class="logo">📚</div>
+          <div class="logo"><i class="fa-solid fa-book-bookmark"></i></div>
           <h1>BookStoré</h1>
           <!-- <button class="btnSignIn" @click="handleNavSignIn">Đăng Ký</button> -->
       </div>

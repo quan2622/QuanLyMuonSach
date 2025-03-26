@@ -19,7 +19,7 @@ export default {
     <div class="mainFrom row">
       <div class="col-5 left-panel d-flex flex-column align-items-center justify-content-center">
           <h2>Chào mừng trở lại!</h2>
-          <div class="logo">📚</div>
+          <div class="logo"><i class="fa-solid fa-book-open-reader"></i></div>
           <h1>BookStoré</h1>
           <p>Hãy đăng nhập để tiếp tục khám phá kho sách phong phú và tận hưởng dịch vụ của chúng tôi.</p>
           <button class="btnSignIn" @click="handleNavSignIn">Đăng Ký</button>

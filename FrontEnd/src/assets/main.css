@@ -294,10 +294,11 @@ main .title-page h3 {
 }
 
 .product__info .product__image img {
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   object-fit: cover;
   object-position: center;
+  box-shadow: 1px 1px 10px #7f7f90;
 }
 
 .product__info .product__content {

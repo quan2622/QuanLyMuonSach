@@ -11,14 +11,6 @@ export default {
   },
   data() {
     return {
-      detailBook: {},
-      // tenSach: "",
-      // donGia: "",
-      // soQuyen: 0,
-      // namXuatBan: null,
-      // tacGia: "",
-      // anhBia: null,
-      // anhBiaPath: "",
       maNXB: this.book.maNXB?._id? this.book.maNXB._id: "",
       publisherStore: usePublisherStore(),
     }
@@ -164,7 +156,7 @@ export default {
           <label for="maNXB" class="form-label">Nhà xuất bản: </label>
           <select class="form-control" id="maNXB" v-model="maNXB">
             <option value="" disabled>-- Chọn Nhà xuất bản --</option>
-            <option v-for="data in publisherStore.publisher" :key="data._id" :value="data._id" >{{ data.tenNXB }}</option>
+            <option v-for="data in publisherStore.publisher" :key="data._id" :value="data._id" >{{ data?.tenNXB }}</option>
           </select>
         </div>
       </div>
@@ -174,10 +166,6 @@ export default {
       <input type="file" id="anhBia" style="margin-left: 5px;" @change="handleChangImage($event)" accept="image/*">
     </div>
     <div class="mb-3">
-      <!-- <div :class="{'img-block': book.anhBiaPath}">
-        <span v-if="book.anhBiaPath" @click="removeImage">X</span>
-        <img v-if="book.anhBiaPath" :src="book.anhBiaPath" alt="" width="200px">
-      </div> -->
       <div :class="{'img-block': book.anhBia}">
         <span v-if="book.anhBia" @click="removeImage">X</span>
         <img id="anhBiaReview" v-if="book.anhBia" :src="book.anhBiaPath || book.anhBia" alt="" width="200px">

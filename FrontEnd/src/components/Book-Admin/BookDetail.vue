@@ -45,11 +45,11 @@ export default {
                 <div class="col-8 option"> <span>Nhà xuất bản:</span> {{ detailBook.maNXB?.tenNXB }}</div>
               </div>
               <div class="row mt-3 content">
-                <div class="col-4 title-option"> <span>Đơn giá:</span> {{ detailBook.donGia }}</div>
+                <div class="col-4 title-option"> <span>Đơn giá:</span> {{ detailBook.donGia }} VNĐ</div>
                 <div class="col-8 option"> <span>Năm xuất bản:</span> {{ detailBook.namXuatBan }}</div>
               </div>
               <div class="row mt-3 content">
-                <div class="col-4 title-option"> <span>Số quyển hiện có:</span> {{ detailBook.soQuyen }}</div>
+                <div class="col-4 title-option"> <span>Số quyển hiện có:</span> {{ detailBook.soQuyen - detailBook.soLuongDaMuon }}</div>
                 <div class="col-8 option"> <span>Số quyển đã mượn:</span> {{ detailBook.soLuongDaMuon }}</div>
               </div>
             </div>

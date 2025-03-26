@@ -104,7 +104,7 @@ class borrowService {
     });
     await newRecord.save();
     // console.log(newRecord);
-    await boookModel.findOneAndUpdate({ _id: newRecord.maSach }, { $inc: { soLuongDaMuon: newRecord.soLuongMuon, soQuyen: -newRecord.soLuongMuon } });
+    await boookModel.findOneAndUpdate({ _id: newRecord.maSach }, { $inc: { soLuongDaMuon: newRecord.soLuongMuon} });
     return {
       status: true,
       message: "Gửi phiếu mượn thành công",

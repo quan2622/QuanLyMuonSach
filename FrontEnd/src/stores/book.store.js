@@ -50,7 +50,7 @@ export const useBookStore = defineStore("book", {
     },
     async createAdmin(data) {
       return await axiosInstance.post("/admin/book", data, {
-        headers: { "Content-Type": "multipart/form-data", }, timeout: 5000
+        headers: { "Content-Type": "multipart/form-data", }, timeout: 20000
       })
         .then((res) => {
           this.statusCreate = res.data.status;

@@ -49,7 +49,7 @@ export default {
             </div>
             <div class="mb-3 pl-2 pr-3">
               <span class="info-title">Tổng tiền: </span>
-              <span class="info-desc price_borrow">{{ data.soLuongMuon*data.maSach?.donGia }}</span>
+              <span class="info-desc price_borrow">{{ data.soLuongMuon*data.maSach?.donGia }} VNĐ</span>
             </div>
             <div class="mb-3 pl-2 pr-3 modal-borderBottom">
               <span class="info-title">Trạng thái: </span>

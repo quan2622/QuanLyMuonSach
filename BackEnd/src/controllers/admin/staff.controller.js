@@ -5,7 +5,10 @@ class staffController {
   // POST admin/account/
   async getProfile(req, res, next) {
     try {
-      const id = req.headers.authorization.split(" ")[1];
+      // console.log('thông tin admin:')
+      // console.log(res.locals.user);
+      const id = res.locals.user._id;
+      // const id = req.headers.authorization.split(" ")[1];
       const record = await staffService.getData(id);
       return res.json(record);
     } catch (error) {

@@ -111,7 +111,7 @@ export default {
                         </h3>
                         <div class="product_id-rate">
                             <div class="id-rate-left">
-                                <span>Số lượng: {{ bookDetail.soQuyen }}</span>
+                                <span>Số lượng: {{ bookDetail.soQuyen - bookDetail.soLuongDaMuon }}</span>
                             </div>
                             <div class="id-rate-right">Mã: {{ bookDetail._id }}</div>
                         </div>
@@ -121,7 +121,7 @@ export default {
                           <span>Năm xuất bản: {{ bookDetail.namXuatBan }}</span>
                         </div>
                         <div class="product__price">
-                            <span>{{ bookDetail.donGia }} đ</span>
+                            <span>{{ bookDetail.donGia }} VNĐ</span>
                         </div>
                         <div id="buy-amount">
                             <span class="buy-amount-title">Số lượng: </span>

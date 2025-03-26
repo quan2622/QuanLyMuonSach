@@ -18,7 +18,7 @@ export default {
     <div class="mainFrom row">
       <div class="col-5 left-panel d-flex flex-column align-items-center justify-content-center">
           <h2>Xin chào, <br> Chào mừng đến!</h2>
-          <div class="logo">✈️</div>
+          <div class="logo"><i class="fa-solid fa-globe"></i></div>
           <h1>BookStoré</h1>
           <p>Chúng tôi cung cấp dịch vụ cho mượn sách đa thể loại với quy trình đơn giản và nhanh chóng. Hãy tham gia ngay để khám phá kho sách phong phú!</p>
           <button class="btnSignIn" @click="handleNavToLogIn">ĐĂNG NHẬP</button>

@@ -1,4 +1,5 @@
 <script>
+import { useBookStore } from "@/stores/book.store";
 import { useBorrowStore } from "@/stores/borrow.store";
 import { ElMessage, ElMessageBox } from "element-plus";
 
@@ -6,6 +7,7 @@ export default {
   data() {
     return {
       borrowStore: useBorrowStore(),
+      bookStore: useBookStore(),
     }
   },
 
@@ -41,6 +43,7 @@ export default {
               plain: true,
             });
             await this.borrowStore.getAll();
+            await this.bookStore.getAll();
           } else {
             ElMessage({
               message: 'Không thể xóa phiếu mượn !',
@@ -56,7 +59,10 @@ export default {
             type: 'warning',
           })
         })
-   }
+    },
+    handleNavToDetail(bookId) {
+      this.$router.push(`/book/${bookId}`);
+    }
   }
 
 }
@@ -75,7 +81,7 @@ export default {
         <table class="table table-hover table-sm">
           <thead>
             <tr>
-              <th>STT</th>
+              <th class="space_index">STT</th>
               <th>Ảnh bìa</th>
               <th>Tên sách</th>
               <th>Số lượng</th>
@@ -88,11 +94,11 @@ export default {
           </thead>
           <tbody>
             <tr v-for="(data, index) in borrowStore.formatDateTime" :key="data._id" :class="{'table-active': data.trangThai === 'borrowed'}">
-              <td>{{ index+1 }}</td>
+              <td class="space_index">{{ index+1 }}</td>
               <td>
-                <img :src="data.maSach?.anhBia" alt="Sản phẩm" width="100px" />
+                <img class="anhBia_borrow" :src="data.maSach?.anhBia" alt="Sản phẩm" width="100px" @click="handleNavToDetail(data.maSach._id)" />
               </td>
-              <td>{{ data.maSach.tenSach }}</td>
+              <td class="tensach_borrow" @click="handleNavToDetail(data.maSach._id)">{{ data.maSach.tenSach }}</td>
               <td style="width: 120px; text-align: center;">
                 {{ data.soLuongMuon }}
               </td>
@@ -158,6 +164,15 @@ export default {
 }
 .note-borrow {
   font-size: 18px;
+}
+
+.tensach_borrow {
+  width: 200px;
+  white-space: pre-wrap;
+}
+
+.anhBia_borrow, .tensach_borrow {
+  cursor: pointer;
 }
 </style>
 
