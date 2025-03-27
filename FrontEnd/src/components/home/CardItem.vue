@@ -27,7 +27,7 @@ export default {
         </div>
       </div>
       <div class="inner-content">
-        <h3 class="inner-title">{{ data.tenSach }}</h3>
+        <h3 class="inner-title" @click="navigaToDetail()">{{ data.tenSach }}</h3>
         <i class="inner-author">{{ data.tacGia }}</i>
 
         <div class="inner-price">
